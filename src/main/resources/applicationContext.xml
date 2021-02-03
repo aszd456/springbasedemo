@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache-3.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--构造方法注入-->
+    <bean class="org.javaboy.Book" id="book">
+        <constructor-arg index="0" value="1"/>
+        <constructor-arg index="1" value="三国"/>
+        <constructor-arg index="2" value="30"/>
+    </bean>
+    <!--set 方法注入
+    <bean class="org.javaboy.Book" id="book">
+        <property name="id" value="1"/>
+        <property name="name" value="三国"/>
+        <property name="prize" value="30"/>
+    </bean>
+    -->
+    <!--静态工厂注入-->
+    <bean class="org.javaboy.OkHttpUtils" factory-method="getInstance" id="okHttpClient"/>
+
+    <!--对象注入 通过ref引入一个对象
+    <bean class="org.javaboy.User" id="user">
+        <property name="cat" ref="cat"/>
+    </bean>
+    <bean class="org.javaboy.Cat" id="cat">
+        <property name="name" value="小白"/>
+        <property name="color" value="white"/>
+    </bean>
+    -->
+    <!--数组注入
+    <bean class="org.javaboy.User" id="user">
+        <property name="cat" ref="cat"/>
+        <property name="favorites">
+            <array>
+                <value>足球</value>
+                <value>篮球</value>
+                <value>乒乓球</value>
+            </array>
+        </property>
+    </bean>
+    -->
+    <!--集合
+    <bean class="org.javaboy.User" id="user">
+        <property name="cat" ref="cat"/>
+        <property name="favorites">
+            <list>
+                <value>足球</value>
+                <value>篮球</value>
+                <value>乒乓球</value>
+            </list>
+        </property>
+        <property name="cats">
+            <list>
+                <ref bean="cat"/>
+                <ref bean="cat2"/>
+                <bean class="org.javaboy.Cat" id="cat3">
+                    <property name="name" value="小花"/>
+                    <property name="color" value="花色"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.javaboy.Cat" id="cat">
+        <property name="name" value="小白"/>
+        <property name="color" value="白色"/>
+    </bean>
+    <bean class="org.javaboy.Cat" id="cat2">
+        <property name="name" value="小黑"/>
+        <property name="color" value="黑色"/>
+    </bean>
+    -->
+    <!--Map 注入
+    <property name="map">
+        <map>
+            <entry key="age" value="99"/>
+            <entry key="name" value="javaboy"/>
+        </map>
+    </property>
+    -->
+    <!-- Properties 注入
+    <property name="info">
+        <props>
+            <prop key="age">99</prop>
+            <prop key="name">javaboy</prop>
+        </props>
+    </property>
+    -->
+    <!--
+    <context:component-scan base-package="org.javaboy.javaconfig"/>
+    上面这行配置表示扫描 org.javaboy.javaconfig 下的所有 Bean。当然也可以按照类来扫描
+    -->
+    <!--
+    也可以在 XML 配置中按照注解的类型进行扫描
+    <context:component-scan base-package="org.javaboy.javaconfig" use-default-filters="true">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+</context:component-scan>
+    -->
+
+</beans>
