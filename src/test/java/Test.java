@@ -1,7 +1,9 @@
 import okhttp3.*;
 import org.javaboy.Book;
+import org.javaboy.DataSource;
 import org.javaboy.JavaConfig;
 import org.javaboy.SayHello;
+import org.javaboy.service.ShowCmdService;
 import org.javaboy.service.UserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -57,7 +59,22 @@ public class Test {
         SayHello hello = ctx2.getBean(SayHello.class);
         System.out.println(hello.sayHello("javaboy"));
 
-        UserService userService = ctx.getBean(UserService.class);
+        UserService userService = ctx2.getBean(UserService.class);
         System.out.println(userService.getAllUser());
+
+        //条件注解
+        ShowCmdService showCmdService = (ShowCmdService) ctx2.getBean("showCmd");
+        System.out.println(showCmdService.showCmd());
+
+        AnnotationConfigApplicationContext ctx3 = new AnnotationConfigApplicationContext();
+        //多环境切换
+        ctx3.getEnvironment().setActiveProfiles("dev");
+        //xml配置
+        //ctx.setConfigLocation("application.xml");
+        //java配置
+        ctx3.register(JavaConfig.class);
+        ctx3.refresh();
+        DataSource dataSource = (DataSource) ctx3.getBean("ds");
+        System.out.println(dataSource);
     }
 }

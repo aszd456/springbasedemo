@@ -109,5 +109,23 @@
     <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 </context:component-scan>
     -->
-
+    <!-- 多环境切换xml配置
+    <beans profile="dev">
+        <bean class="org.javaboy.DataSource" id="dataSource">
+            <property name="url" value="jdbc:mysql://localhost:3306/dev"/>
+            <property name="userName" value="root"/>
+            <property name="password" value="123456"/>
+        </bean>
+    </beans>
+    <beans profile="prod">
+        <bean class="org.javaboy.DataSource" id="dataSource">
+            <property name="url" value="jdbc:mysql://192.168.1.168:3306/dev"/>
+            <property name="userName" value="root"/>
+            <property name="password" value="123456"/>
+        </bean>
+    </beans>
+    -->
+    <!--bean作用域 singleton,prototype,request,session-->
+    <!--java配置 @Scope("session")-->
+    <bean class="org.javaboy.User" id="user2" scope="prototype"/>
 </beans>
