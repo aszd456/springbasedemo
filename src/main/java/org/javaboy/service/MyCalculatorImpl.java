@@ -16,9 +16,8 @@ import org.springframework.stereotype.Component;
  * @Version 1.0
  **/
 @Component
-public class MyCalculatorImpl implements MyCalculator {
-    @Override
-    @Action
+public class MyCalculatorImpl {
+//    @Action
     public int add(int a, int b) {
         return a + b;
     }

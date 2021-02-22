@@ -3,6 +3,7 @@ import org.javaboy.Book;
 import org.javaboy.DataSource;
 import org.javaboy.JavaConfig;
 import org.javaboy.SayHello;
+import org.javaboy.service.MyCalculatorImpl;
 import org.javaboy.service.ShowCmdService;
 import org.javaboy.service.UserService;
 import org.jetbrains.annotations.NotNull;
@@ -31,29 +32,29 @@ public class Test {
         System.out.println(book);
 
         //静态工厂注入
-        OkHttpClient okHttpClient = ctx.getBean("okHttpClient", OkHttpClient.class);
-        Request request = new Request.Builder().get()
-                .url("https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2020%2F1227%2F5eba4df6j00qlzdb50051c000u000u0m.jpg&thumbnail=650x2147483647&quality=80&type=jpg").build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                System.out.println(e.getMessage());
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                FileOutputStream out = new FileOutputStream(new File("D:\\学习书籍\\workspace\\iu.jpg"));
-                int len;
-                byte[] buf = new byte[1024];
-                InputStream is = Objects.requireNonNull(response.body()).byteStream();
-                while ((len = is.read(buf)) != -1) {
-                    out.write(buf, 0, len);
-                }
-                out.close();
-                is.close();
-            }
-        });
+//        OkHttpClient okHttpClient = ctx.getBean("okHttpClient", OkHttpClient.class);
+//        Request request = new Request.Builder().get()
+//                .url("https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2020%2F1227%2F5eba4df6j00qlzdb50051c000u000u0m.jpg&thumbnail=650x2147483647&quality=80&type=jpg").build();
+//        Call call = okHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                System.out.println(e.getMessage());
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                FileOutputStream out = new FileOutputStream(new File("D:\\学习书籍\\workspace\\iu.jpg"));
+//                int len;
+//                byte[] buf = new byte[1024];
+//                InputStream is = Objects.requireNonNull(response.body()).byteStream();
+//                while ((len = is.read(buf)) != -1) {
+//                    out.write(buf, 0, len);
+//                }
+//                out.close();
+//                is.close();
+//            }
+//        });
         //注意，配置的加载，是使用 AnnotationConfigApplicationContext 来实现
         AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(JavaConfig.class);
         SayHello hello = ctx2.getBean(SayHello.class);
@@ -76,5 +77,12 @@ public class Test {
         ctx3.refresh();
         DataSource dataSource = (DataSource) ctx3.getBean("ds");
         System.out.println(dataSource);
+
+        System.out.println("切点测试");
+        //切面
+        AnnotationConfigApplicationContext ctx4 = new AnnotationConfigApplicationContext(JavaConfig.class);
+        MyCalculatorImpl myCalculator = ctx4.getBean(MyCalculatorImpl.class);
+        myCalculator.add(3, 4);
+        myCalculator.min(6, 2);
     }
 }

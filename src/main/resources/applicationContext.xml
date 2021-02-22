@@ -128,4 +128,28 @@
     <!--bean作用域 singleton,prototype,request,session-->
     <!--java配置 @Scope("session")-->
     <bean class="org.javaboy.User" id="user2" scope="prototype"/>
+    <!--spring xml中配置 Aop
+    <bean class="org.javaboy.LogAspect" id="logAspect"/>
+    <aop:config>
+        <aop:pointcut id="pc1" expression="execution(* org.javaboy.aop.commons.*.*(..))"/>
+        <aop:aspect ref="logAspect">
+            <aop:before method="before" pointcut-ref="pc1"/>
+            <aop:after method="after" pointcut-ref="pc1"/>
+            <aop:after-returning method="returning" pointcut-ref="pc1" returning="r"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pc1" throwing="e"/>
+            <aop:around method="around" pointcut-ref="pc1"/>
+        </aop:aspect>
+    </aop:config>
+    -->
+    <!--spring-jdbc XML 文件来实现
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property name="username" value="root"/>
+        <property name="password" value="123"/>
+        <property name="url" value="jdbc:mysql:///test01?serverTimezone=Asia/Shanghai"/>
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    </bean>
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    -->
 </beans>

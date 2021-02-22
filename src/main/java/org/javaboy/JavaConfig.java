@@ -18,11 +18,11 @@ import org.springframework.context.annotation.*;
 @Configuration
 //混合配置
 //@ImportResource("classpath:applicationContext.xml")
-@ComponentScan(basePackages = "org.javaboy.service")
+@ComponentScan
 //这个配置表示扫描 org.javaboy.javaconfig 下的所有 Bean，但是除了 Controller
 //@ComponentScan(basePackages = "org.javaboy.javaconfig",useDefaultFilters = true,
 //        excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,classes = Controller.class)})
-@EnableAspectJAutoProxy  //开启自动代理
+@EnableAspectJAutoProxy
 public class JavaConfig {
     @Bean
     SayHello sayHello() {
