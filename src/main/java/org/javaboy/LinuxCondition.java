@@ -21,7 +21,8 @@ import java.util.Objects;
  **/
 public class LinuxCondition implements Condition {
     @Override
-    public boolean matches(@NotNull ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
+    public boolean matches(@NotNull ConditionContext conditionContext,
+                           @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
         return Objects.requireNonNull(conditionContext.getEnvironment().getProperty("os.name"))
                 .toLowerCase(Locale.ROOT).contains("linux");
     }

@@ -21,8 +21,9 @@ import java.util.Objects;
  **/
 public class WinCondition implements Condition {
     @Override
-    public boolean matches(@NotNull ConditionContext conditionContext, @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
-        return Objects.requireNonNull(conditionContext.getEnvironment().getProperty("os.name")).toLowerCase(Locale.ROOT).contains(
-                "windows");
+    public boolean matches(@NotNull ConditionContext conditionContext,
+                           @NotNull AnnotatedTypeMetadata annotatedTypeMetadata) {
+        return Objects.requireNonNull(conditionContext.getEnvironment().getProperty("os.name"))
+                .toLowerCase(Locale.ROOT).contains("windows");
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.context.annotation.*;
 //这个配置表示扫描 org.javaboy.javaconfig 下的所有 Bean，但是除了 Controller
 //@ComponentScan(basePackages = "org.javaboy.javaconfig",useDefaultFilters = true,
 //        excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,classes = Controller.class)})
+@EnableAspectJAutoProxy  //开启自动代理
 public class JavaConfig {
     @Bean
     SayHello sayHello() {
@@ -31,6 +32,7 @@ public class JavaConfig {
     /**
      * 一定要给两个bean相同的名字，在调用时才可以自动匹配
      * 给每个bean加上条件注解，当条件中的matches方法返回true就会生效
+     *
      * @return
      */
     @Bean("showCmd")
@@ -47,7 +49,7 @@ public class JavaConfig {
 
     @Bean("ds")
     @Profile("dev")
-    DataSource devDataSource(){
+    DataSource devDataSource() {
         DataSource dataSource = new DataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/dev");
         dataSource.setUserName("root");
@@ -57,7 +59,7 @@ public class JavaConfig {
 
     @Bean("ds")
     @Profile("prod")
-    DataSource prodDataSource(){
+    DataSource prodDataSource() {
         DataSource dataSource = new DataSource();
         dataSource.setUrl("jdbc:mysql://192.168.1.168:3306/dev");
         dataSource.setUserName("root");
