@@ -66,5 +66,10 @@ public class JavaConfig {
         dataSource.setPassword("123456");
         return dataSource;
     }
+    /**
+     * 1、一个java配置类加上另外一个配置类使用@Import(AppConfig1.class)，AppConfig1可以不加@Configuration注解
+     * 2、@ComponentScan(“com.springdemo.dao”)，AppConfig1在com.springdemo.dao包下或者子包下，
+     * 可以不使用@Import注解，但是必须加@Configuration注解
+     */
 
 }

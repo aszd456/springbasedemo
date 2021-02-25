@@ -1,9 +1,13 @@
 package org.javaboy;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -14,6 +18,9 @@ import javax.sql.DataSource;
  * JdbcTemplate 的配置非常容易，只需要 new 一个 Bean 出来，然后配置一下 DataSource 就可以
  */
 @Configuration
+//@ImportResource("applicationContext.xml")
+@ComponentScan
+@EnableTransactionManagement
 public class JdbcConfig {
 
     @Bean
@@ -29,5 +36,10 @@ public class JdbcConfig {
     @Bean
     JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 }
