@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 //@ImportResource("applicationContext.xml")
-@ComponentScan
+@ComponentScan(basePackages = "org.javaboy.service")
 @EnableTransactionManagement
 public class JdbcConfig {
 
