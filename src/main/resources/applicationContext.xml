@@ -190,7 +190,7 @@
     </aop:config>
     -->
     <!--java配置事务 如果要开启 Java 注解配置，在 XML 配置中添加如下配置,
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <tx:annotation-driven transaction-manager="transactionManager" /> 等于上面两行配置
     需要@ImportResource("applicationContext.xml")
     或者使用，注解@EnableTransactionManagement通知Spring,@Transactional注解的类被事务的切面包围。
     这样@Transactional就可以使用了
